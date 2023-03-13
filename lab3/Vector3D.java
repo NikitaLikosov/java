@@ -40,7 +40,19 @@ public class Vector3D {
   boolean pcollin(Vector3D v) {
     return this.vecX(v).equals(new Vector3D(0, 0, 0));
   } // проверка на коллинеарность
-  boolean equals(Vector3D v) {
-    return x == v.x && y == v.y && z == v.z;
-  } 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+     }
+    if (o == null || getClass() != o.getClass()) { 
+            return false; 
+        } 
+ 
+        // 3 
+        Vector3D vector = (Vector3D) o; 
+        return x == vector.x && 
+               y == vector.y && 
+               z == vector.z; 
+    } 
 }
