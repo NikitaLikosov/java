@@ -58,7 +58,7 @@ public class Vector2DTest {
         sc.close();
         throw new NonSemException(); 
       }
-      B.sub(A1).multiply(Vector2D.Vect2((Vector2D) B.sub(A1), n)[1]).printVector();
+      Vector2DTest.calcSim(n, A).add(A1.multiply(Vector2D.Vect2(A1, n)[0])).printVector();
       sc.close();
     }
 }

@@ -28,7 +28,12 @@ public class Vector2D extends Vector {
     if (a.pcollin(b)) {
       throw new VcollinearException();
     }
-    return new double[]{a.pr(b), b.pr(a)} ;
+    if (a.scalar(b) < 0) {
+      return new double[]{b.multiply(-1).pr(a), a.pr(b.multiply(-1))};
+
+    } else {
+      return new double[]{b.pr(a), a.pr(b)};
+    }
   }
   @Override
   public boolean equals(Object o) {
