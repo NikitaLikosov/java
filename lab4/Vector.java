@@ -1,5 +1,6 @@
-class Vector {
+abstract class  Vector implements IVector  {
   double[] components;
+  public abstract Vector categorizer(double[] a);
   public Vector(double[] componentsArr) { 
     this.components = componentsArr;
   };
@@ -18,7 +19,7 @@ class Vector {
   };  // возвращает компоненту вектора
   public void printVector() {
     for (int i = 0; i < components.length; i++){
-      System.out.println("Компонент" + i + ": " + components[i]);       
+      System.out.println("Компонент " + i + ": " + components[i]);       
     }
   }; //выводит на консоль информацию о векторе
   public double scalar(Vector v) {
@@ -41,24 +42,24 @@ class Vector {
     for (int i = 0; i < this.dimension(); i++){
       res[i] = components[i] * factor;
     }
-    return new Vector(res);
+    return categorizer(res);
   };
   public Vector add(Vector v){
     double[] res = new double[this.dimension()];
     for (int i = 0; i < components.length; i++){
       res[i] = this.components[i] + v.components[i];
     }
-    return new Vector(res);
+    return categorizer(res);
   };
   public Vector sub(Vector v) {
     double[] res = new double[this.dimension()];
     for (int i = 0; i < components.length; i++){
       res[i] = this.components[i] - v.components[i];
     }
-    return new Vector(res);
+    return categorizer(res);
   };
   public double pr(Vector v) {
     return (this.scalar(v))/(v.len());
-  }; // возвращает проекция вектора на вектор v по формуле
+  }; // возвращает проекция вектора на вектор v
   
 }
