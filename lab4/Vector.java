@@ -2,15 +2,18 @@ abstract class  Vector implements IVector  {
   double[] components;
   public abstract Vector categorizer(double[] a);
   public Vector(double[] componentsArr) { 
-    this.components = componentsArr;
+    this.components = componentsArr.clone();
   };
   public Vector(Vector v, int dim) {
-    double[] res = new double[dim];
-    for (int i = 0; i < v.dimension(); i++){
+    double[] res = new double[Math.min(dim, v.dimension())];
+    for (int i = 0; i < Math.min(dim, v.dimension()); i++){
       res[i] = v.components[i];
     }
+    for (int i = Math.min(dim, v.dimension()); i < dim; i++){
+      res[i] = 0;
+    }
     components = res;
-  };
+  };// add
   public int dimension() {
       return components.length;
     }; // размерность
@@ -46,14 +49,15 @@ abstract class  Vector implements IVector  {
   };
   public Vector add(Vector v){
     double[] res = new double[this.dimension()];
-    for (int i = 0; i < components.length; i++){
+
+    for (int i = 0; i < Math.min(this.dimension(), v.dimension()) ; i++){
       res[i] = this.components[i] + v.components[i];
     }
     return categorizer(res);
   };
   public Vector sub(Vector v) {
     double[] res = new double[this.dimension()];
-    for (int i = 0; i < components.length; i++){
+    for (int i = 0; i < Math.min(this.dimension(), v.dimension()); i++){
       res[i] = this.components[i] - v.components[i];
     }
     return categorizer(res);
