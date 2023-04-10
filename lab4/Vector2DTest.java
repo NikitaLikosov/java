@@ -70,5 +70,6 @@ public class Vector2DTest {
       B.sub(A1).multiply(lenA1X).add(A1).printVector();;
       
       sc.close();
+      // A 2 0 ; B -1 2; n 1 -1 O 1 1
     }
 }
