@@ -37,7 +37,7 @@ public class Vector2DTest {
     
     public static void task2() throws VcollinearException, NonSemException {
       double s1, s2 ,s3, s4, s5, s6, s7, s8, lenA1X;
-      Vector2D n, A, B, A1, O, pr;
+      Vector2D n, A, B, A1, O, pr, newN;
       Scanner sc = new Scanner(System.in);
       System.out.println("Введите кординаты точки A");
       s1 = Double.parseDouble(sc.nextLine());
@@ -64,12 +64,15 @@ public class Vector2DTest {
         sc.close();
         throw new NonSemException(); 
       }
-      pr = (Vector2D) ((Vector2D) O.sub(A)).prVect(n);
-      A1.printVector();
+      A.sub(O).printVector();
+      pr = (Vector2D) n.prVect(((Vector2D) O.sub(A)));
+      A1 = (Vector2D) pr.multiply(-1).add(O);
       lenA1X = (pr.len() * pr.len())/(pr.multiply(-1).scalar(B.sub(A1)));
-      B.sub(A1).multiply(lenA1X).add(A1).printVector();;
-      
+      newN = (Vector2D) A1.sub(B).multiply(1/A1.sub(B).len());
+      A1.add(newN.multiply(lenA1X)).printVector();
       sc.close();
-      // A 2 0 ; B -1 2; n 1 -1 O 1 1
+      // A 2 0 ; B -1 2; n 1 -1; O 1 1
+      // A 2 0 ; B -1 0; n 1 -1; O 1 1
+
     }
 }
