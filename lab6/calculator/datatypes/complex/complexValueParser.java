@@ -14,7 +14,8 @@ public class complexValueParser implements AbstractValueParser {
       String regex = "[^i]*$";
       Matcher m = Pattern.compile(regex).matcher(value.split("\\+")[1]);
       if (m.find()) {
-        double image = Double.parseDouble(m.group(0));
+        String num = m.group(0).replace("(", "").replace(")", "");
+        double image = Double.parseDouble(num);
         return new complexValue(real, image);
       } else throw new NumberFormatException();
     } catch (NumberFormatException exception) {

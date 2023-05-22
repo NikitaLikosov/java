@@ -6,6 +6,10 @@ import calculator.datatypes.real.RealValueParser;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.*;
 
 public class calculatorUI {
@@ -20,6 +24,7 @@ public class calculatorUI {
   JLabel label3;
   JTextField result;
   JButton go;
+  JButton saveBtn;
   JLabel labelEmpty1;
   JLabel labelEmpty2;
   JComboBox<String> operationBox;
@@ -39,12 +44,14 @@ public class calculatorUI {
     this.label3 = new JLabel("Итог:");
     this.result = new JTextField(10);
     this.go = new JButton("Результат");
+    this.saveBtn = new JButton("Сохранить");
     this.labelEmpty1 = new JLabel("");
     this.labelEmpty2 = new JLabel("");
     this.typeBox = new JComboBox<String>(typeArray.getNameItems());
     this.operationBox = new JComboBox<String>(itemsOperation);
 
     go.addActionListener(new calcResult());
+    saveBtn.addActionListener(new saveResult());
     // Добавляем компоненты в панель
     windowContent.add(typeBox);
     windowContent.add(labelEmpty1);
@@ -57,6 +64,7 @@ public class calculatorUI {
     windowContent.add(label3);
     windowContent.add(result);
     windowContent.add(go);
+    windowContent.add(saveBtn);
 
     // Создаём фрейм и задаём панель для него
     JFrame frame = new JFrame(
@@ -89,6 +97,34 @@ public class calculatorUI {
         );
         result.setText(res);
       } catch (Exception e1) {
+        e1.printStackTrace();
+      }
+    }
+  }
+
+  class saveResult implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      File file = new File("res.txt");
+      try {
+        file.createNewFile();
+      } catch (IOException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
+
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        String line =
+          field1.getText() +
+          ((String) operationBox.getSelectedItem()) +
+          field2.getText() +
+          "=" +
+          result.getText();
+        writer.write(line);
+        writer.close();
+      } catch (IOException e1) {
+        // TODO Auto-generated catch block
         e1.printStackTrace();
       }
     }
