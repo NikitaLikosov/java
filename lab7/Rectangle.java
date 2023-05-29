@@ -9,6 +9,9 @@ public class Rectangle extends Figure implements IShape {
     super("Прямоугольник", Color.BLUE, x, y);
     this.height = height;
     this.weight = weight;
+    if (weight <= 0 || height <= 0) {
+      throw new Error("height or width is negativ");
+    }
   }
 
   @Override

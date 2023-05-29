@@ -13,6 +13,8 @@ public class Main extends JFrame {
 
   @Override
   public void paint(Graphics g) {
+    Double x = 2.0;
+    Double y = 1.0;
     Graphics2D gr2d = (Graphics2D) g; // Рисуем простые линии
     gr2d.setPaint(Color.BLUE);
     gr2d.drawLine(0, 300, 700, 300);
@@ -26,8 +28,25 @@ public class Main extends JFrame {
       gr2d.drawLine(345, 300 - i * 20, 355, 300 - i * 20);
       gr2d.drawString(i + "", 352, 300 - i * 20);
     }
+    Rectangle rt = new Rectangle(
+      (int) Math.round(((x / 5 + 3.5) * 100) - 2),
+      (int) Math.round(((y / (-5) + 3.0) * 100) - 2),
+      300,
+      100
+    );
+    gr2d.drawOval(
+      (int) Math.round(((x / 5 + 3.5) * 100) - 2),
+      (int) Math.round(((y / (-5) + 3.0) * 100) - 2),
+      4,
+      4
+    );
+    gr2d.fillOval(
+      (int) Math.round(((x / 5 + 3.5) * 100) - 2),
+      (int) Math.round(((y / (-5) + 3.0) * 100) - 2),
+      4,
+      4
+    );
 
-    Rectangle rt = new Rectangle(300, 250, 100, 100);
     gr2d.setPaint(Color.black);
     gr2d.draw(new Rectangle2D.Double(rt.x, rt.y, rt.height, rt.weight));
     double rad = rt.roundRect();
