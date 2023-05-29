@@ -1,7 +1,7 @@
 public interface IShape {
-  public double getPerimeter();
+  public double getPerimeter(); // Периметр
 
-  public double getArea();
+  public double getArea(); // Площадь
 
-  public String getName();
+  public String getName(); // Имя 
 }
